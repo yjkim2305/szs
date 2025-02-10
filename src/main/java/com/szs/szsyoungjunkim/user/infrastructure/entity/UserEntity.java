@@ -1,5 +1,6 @@
 package com.szs.szsyoungjunkim.user.infrastructure.entity;
 
+import com.szs.szsyoungjunkim.common.converter.EncryptorConverter;
 import com.szs.szsyoungjunkim.common.domain.entity.BaseTimeEntity;
 import com.szs.szsyoungjunkim.user.domain.User;
 import jakarta.persistence.*;
@@ -25,6 +26,7 @@ public class UserEntity extends BaseTimeEntity {
     @Column(nullable = false)
     private String name;
 
+    @Convert(converter = EncryptorConverter.class)
     @Column(nullable = false)
     private String regNo;
 
