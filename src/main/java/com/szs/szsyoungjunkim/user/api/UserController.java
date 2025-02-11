@@ -39,6 +39,13 @@ public class UserController {
         return ApiRes.createSuccessWithNoContent();
     }
 
+    @Operation(summary = "로그인", description = "사용자가 로그인을 한다.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "로그인 성공", content = @Content(mediaType = "application/json")),
+                    @ApiResponse(responseCode = "401", description = "사용자 아이디 또는 패스워드가 적합하지 않을 경우",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(example = "{\"status\": 401, \"message\": \"아이디 또는 비밀번호가 잘못되었습니다.\", \"data\": null}"))),
+            })
     @PostMapping("/login")
     public ApiRes<UserLoginResponse> loginUser(@RequestBody UserLoginRequest rq) {
         return ApiRes.createSuccess(UserLoginResponse.of(userService.login(UserLoginCommand.from(rq))));
