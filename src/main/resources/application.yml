@@ -27,9 +27,11 @@ logging:
     org.hibernate.type.descriptor.sql: TRACE
 
   jwt:
-    token:
-      secret: "and0c2VjcmV0a2V5and0c2VjcmV0a2V5and0c2VjcmV0a2V5and0c2VjcmV0a2V5and0c2VjcmV0a2V5"
-
+    secret: "and0c2VjcmV0a2V5and0c2VjcmV0a2V5and0c2VjcmV0a2V5and0c2VjcmV0a2V5and0c2VjcmV0a2V5"
+    access:
+      expiration: 600000 # 10분
+    refresh:
+      expiration: 86400000 # 24시간
 springdoc:
   swagger-ui:
     path: /3o3/swagger.html
