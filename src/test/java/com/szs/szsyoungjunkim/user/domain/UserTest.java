@@ -24,7 +24,7 @@ class UserTest {
     @DisplayName("허용된 사용자는 예외 없이 validateUsers를 통과해야 한다.")
     void validateUsers_Success() {
         //given
-        User user = User.builder()
+        User user = User.entityBuilder()
                 .userId("dongtak123")
                 .password("password")
                 .name("동탁")
@@ -39,7 +39,7 @@ class UserTest {
     @DisplayName("허용되지 않는 사용자는 예외가 발생해야 한다.")
     void validateUsers_Fail() {
         //given
-        User user = User.builder()
+        User user = User.entityBuilder()
                 .userId("dongtak123")
                 .password("password")
                 .name("동탁")
