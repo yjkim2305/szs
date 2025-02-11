@@ -22,7 +22,7 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/v3/api-docs/**", "/3o3/swagger*/**", "/h2-console/**"
-                                , "/szs/signup", "/szs/login").permitAll()
+                                , "/szs/users", "/szs/login").permitAll()
                         .anyRequest()
                         .authenticated())
                 .sessionManagement((session) -> session
