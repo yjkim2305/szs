@@ -12,18 +12,18 @@ public class ApiRes<T> {
     @Schema(description = "응답 코드", example = "200")
     private int status;
 
-    @Schema(description = "응답 메시지", example = "Sucess")
+    @Schema(description = "응답 메시지", example = "success")
     private String message;
 
     private T data;
 
 
     public static <T> ApiRes<T> createSuccess(T data) {
-        return new ApiRes<>(HttpStatus.OK.value(), "success", null);
+        return new ApiRes<>(HttpStatus.OK.value(), "success", data);
     }
 
     public static ApiRes<?> createSuccessWithNoContent() {
-        return new ApiRes<>(HttpStatus.OK.value(), null, null);
+        return new ApiRes<>(HttpStatus.OK.value(), "success", null);
     }
 
     public static ApiRes<?> error(int status, String message) {

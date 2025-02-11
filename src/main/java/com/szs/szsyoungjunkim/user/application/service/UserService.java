@@ -44,6 +44,5 @@ public class UserService {
         String refreshToken = jwtUtil.createRefreshJwt("refresh", user.getUserId());
 
         return UserLoginDto.of(accessToken, refreshToken);
-
     }
 }

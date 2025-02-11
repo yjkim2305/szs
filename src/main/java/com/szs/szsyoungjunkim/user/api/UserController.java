@@ -2,7 +2,10 @@ package com.szs.szsyoungjunkim.user.api;
 
 import com.szs.szsyoungjunkim.common.api.response.ApiRes;
 import com.szs.szsyoungjunkim.user.api.request.UserCreateReqest;
+import com.szs.szsyoungjunkim.user.api.request.UserLoginRequest;
+import com.szs.szsyoungjunkim.user.api.response.UserLoginResponse;
 import com.szs.szsyoungjunkim.user.application.dto.UserCreateCommand;
+import com.szs.szsyoungjunkim.user.application.dto.UserLoginCommand;
 import com.szs.szsyoungjunkim.user.application.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -34,5 +37,10 @@ public class UserController {
     public ApiRes<?> signUpUser(@RequestBody UserCreateReqest rq) {
         userService.signUpUser(UserCreateCommand.from(rq));
         return ApiRes.createSuccessWithNoContent();
+    }
+
+    @PostMapping("/login")
+    public ApiRes<UserLoginResponse> loginUser(@RequestBody UserLoginRequest rq) {
+        return ApiRes.createSuccess(UserLoginResponse.of(userService.login(UserLoginCommand.from(rq))));
     }
 }
