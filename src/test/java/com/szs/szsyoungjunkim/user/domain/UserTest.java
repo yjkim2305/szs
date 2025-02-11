@@ -73,4 +73,36 @@ class UserTest {
 
         assertThat(passwordEncoder.matches("securePassword", user.getPassword())).isTrue();
     }
+
+    @Test
+    @DisplayName("비밀번호가 올바르면 검증을 통과한다.")
+    void validatePassword_Success() {
+        //given
+        UserCreateCommand command = new UserCreateCommand("user123", "securePassword", "유비", "790411-1656116");
+        User user = User.createWithEncodedPassword(command, passwordEncoder);
+
+        //when & then
+        assertDoesNotThrow(() -> user.validatePassword("securePassword", passwordEncoder));
+    }
+
+    @Test
+    @DisplayName("비밀번호가 올바르지 않으면 검증에서 예외가 발생한다.")
+    void validatePassword_Fail() {
+        //given
+        User user = User.entityBuilder()
+                .userId("dongtak123")
+                .password("password")
+                .name("동탁")
+                .regNo("921108-1582817")
+                .build();
+
+        //when
+        CoreException exception = assertThrows(CoreException.class, () -> {
+            user.validatePassword(user.getPassword(), passwordEncoder);
+        });
+
+        //then
+        assertEquals(UserErrorType.NOT_EXIST_USER_PASSWORD.getMessage(), exception.getMessage());
+        assertEquals(UserErrorType.NOT_EXIST_USER_PASSWORD.name(), exception.getErrorType().getErrorCode());
+    }
 }
