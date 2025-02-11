@@ -16,4 +16,9 @@ public class UserRepositoryImpl implements UserRepository {
     public void signUpUser(User user) {
         userJpaRepository.save(UserEntity.toEntity(user));
     }
+
+    @Override
+    public Boolean existsByUserId(String username) {
+        return userJpaRepository.existsByUserId(username);
+    }
 }

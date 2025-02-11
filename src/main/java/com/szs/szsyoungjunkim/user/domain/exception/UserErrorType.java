@@ -4,7 +4,8 @@ import com.szs.szsyoungjunkim.common.exception.ErrorType;
 import org.springframework.http.HttpStatus;
 
 public enum UserErrorType implements ErrorType {
-    INVALID_USER(HttpStatus.OK, "회원가입에 적합하지 않는 회원입니다.")
+    INVALID_USER(HttpStatus.BAD_REQUEST, "회원가입에 적합하지 않는 회원입니다."),
+    EXIST_USER(HttpStatus.CONFLICT, "이미 존재하는 회원입니다.")
     ;
 
 
