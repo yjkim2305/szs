@@ -67,15 +67,7 @@ public class Deduction {
         deductions.addAll(Deduction.fromNationalPenstionList(deductionResponse.nationalPension(), userId));
         //신용카드소득공제
         deductions.addAll(convertByCreditCardDeduction(deductionYear, deductionResponse.creditCardDeductionResponse().monthDeductions(), userId));
-        //세액공제
-        deductions.add(
-                Deduction.of(
-                        userId
-                        , deductionYear
-                        , Double.valueOf(deductionResponse.taxCredit().replace(",", ""))
-                        , DeductionType.TAX_CREDIT
-                )
-        );
+
         return deductions;
     }
 
