@@ -7,7 +7,7 @@ import java.util.Map;
 
 public record CreditCardDeductionResponse(
         @JsonProperty("year")
-        int year,
+        Integer year,
 
         @JsonProperty("month")
         List<Map<String, String>> monthDeductions
