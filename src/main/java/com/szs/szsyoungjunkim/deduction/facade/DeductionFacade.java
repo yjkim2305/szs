@@ -29,6 +29,6 @@ public class DeductionFacade {
             throw new CoreException(DeductionErrorType.INVALID_RESPONSE_VALUE);
         }
 
-        deductionService.save(scrapResponse.getData());
+        deductionService.saveDeductions(scrapResponse.getData().deduction(), userId);
     }
 }

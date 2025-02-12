@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -60,12 +61,54 @@ public class Deduction {
     }
 
     public static List<Deduction> convertToDeductions(DeductionResponse deductionResponse, String userId) {
-        //국민연금 처리
         List<Deduction> deductions = new ArrayList<>();
-
+        int deductionYear = deductionResponse.creditCardDeductionResponse().year();
+        //국민연금
         deductions.addAll(Deduction.fromNationalPenstionList(deductionResponse.nationalPension(), userId));
+        //신용카드소득공제
+        deductions.addAll(convertByCreditCardDeduction(deductionYear, deductionResponse.creditCardDeductionResponse().monthDeductions(), userId));
+        //세액공제
+        deductions.add(
+                Deduction.of(
+                        userId
+                        , deductionYear
+                        , Double.valueOf(deductionResponse.taxCredit().replace(",", ""))
+                        , DeductionType.TAX_CREDIT
+                )
+        );
+        return deductions;
+    }
+
+    private static List<Deduction> convertByCreditCardDeduction(int deductionYear, List<Map<String, String>> monthDeductions, String userId) {
+        List<Deduction> deductions = new ArrayList<>();
+        for (Map<String, String> monthDeduction : monthDeductions) {
+            for (Map.Entry<String, String> entry : monthDeduction.entrySet()) {
+                int month = Integer.parseInt(entry.getKey());
+                double amount = Double.parseDouble(entry.getValue().replace(",", ""));
+                deductions.add(Deduction.of(userId, deductionYear, month, amount, DeductionType.CREDIT_CARD));
+            }
+        }
 
         return deductions;
+    }
+
+    public static Deduction of(String userId, Integer taxYear, Double amount, DeductionType type) {
+        return Deduction.defaultBuilder()
+                .userId(userId)
+                .taxYear(taxYear)
+                .amount(amount)
+                .type(type)
+                .build();
+    }
+
+    public static Deduction of(String userId, Integer taxYear, Integer taxMonth, Double amount, DeductionType type) {
+        return Deduction.defaultBuilder()
+                .userId(userId)
+                .taxYear(taxYear)
+                .taxMonth(taxMonth)
+                .amount(amount)
+                .type(type)
+                .build();
     }
 
     public static List<Deduction> fromNationalPenstionList(List<NationalPensionDeductionResponse> nationalPensionDeductions, String userId) {

@@ -19,6 +19,8 @@ spring:
       hibernate:
         default_batch_fetch_size: 100
         format_sql: true
+        jdbc:
+          batch_size: 100
 
   jwt:
     secret: "and0c2VjcmV0a2V5and0c2VjcmV0a2V5and0c2VjcmV0a2V5and0c2VjcmV0a2V5and0c2VjcmV0a2V5"

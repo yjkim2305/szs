@@ -1,6 +1,8 @@
 package com.szs.szsyoungjunkim.deduction.application.service;
 
-import com.szs.szsyoungjunkim.deduction.feign.response.ScrapResponse;
+import com.szs.szsyoungjunkim.deduction.application.repository.DeductionRepository;
+import com.szs.szsyoungjunkim.deduction.domain.Deduction;
+import com.szs.szsyoungjunkim.deduction.feign.response.DeductionResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,9 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class DeductionService {
 
+    private final DeductionRepository deductionRepository;
+
     @Transactional
-    public void save(ScrapResponse scrapResponse) {
-
-
+    public void saveDeductions(DeductionResponse deductionResponse, String userId) {
+        deductionRepository.saveAll(Deduction.convertToDeductions(deductionResponse, userId));
     }
 }

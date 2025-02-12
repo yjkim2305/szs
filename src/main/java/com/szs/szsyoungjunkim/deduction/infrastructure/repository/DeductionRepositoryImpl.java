@@ -6,6 +6,8 @@ import com.szs.szsyoungjunkim.deduction.infrastructure.entity.DeductionEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class DeductionRepositoryImpl implements DeductionRepository {
@@ -13,7 +15,7 @@ public class DeductionRepositoryImpl implements DeductionRepository {
     private final DeductionJpaRepository deductionJpaRepository;
 
     @Override
-    public void save(Deduction deduction) {
-        deductionJpaRepository.save(DeductionEntity.toEntity(deduction));
+    public void saveAll(List<Deduction> deductions) {
+        deductionJpaRepository.saveAll(DeductionEntity.toEntityList(deductions));
     }
 }
