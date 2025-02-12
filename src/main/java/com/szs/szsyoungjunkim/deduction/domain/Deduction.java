@@ -18,28 +18,28 @@ import java.util.List;
 public class Deduction {
     private Long id;
     private String userId;
-    private Integer year;
-    private Integer month;
+    private Integer taxYear;
+    private Integer taxMonth;
     private Double amount;
     private DeductionType type;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
 
     @Builder(builderMethodName = "defaultBuilder")
-    private Deduction(String userId, Integer year, Integer month, Double amount, DeductionType type) {
+    private Deduction(String userId, Integer taxYear, Integer taxMonth, Double amount, DeductionType type) {
         this.userId = userId;
-        this.year = year;
-        this.month = month;
+        this.taxYear = taxYear;
+        this.taxMonth = taxMonth;
         this.amount = amount;
         this.type = type;
     }
 
     @Builder(builderMethodName = "entityBuilder")
-    private Deduction(Long id, String userId, Integer year, Integer month, Double amount, DeductionType type, LocalDateTime createdDate, LocalDateTime updatedDate) {
+    private Deduction(Long id, String userId, Integer taxYear, Integer taxMonth, Double amount, DeductionType type, LocalDateTime createdDate, LocalDateTime updatedDate) {
         this.id = id;
         this.userId = userId;
-        this.year = year;
-        this.month = month;
+        this.taxYear = taxYear;
+        this.taxMonth = taxMonth;
         this.amount = amount;
         this.type = type;
         this.createdDate = createdDate;
@@ -50,8 +50,8 @@ public class Deduction {
         return Deduction.entityBuilder()
                 .id(deductionEntity.getId())
                 .userId(deductionEntity.getUserId())
-                .year(deductionEntity.getYear())
-                .month(deductionEntity.getMonth())
+                .taxYear(deductionEntity.getTaxYear())
+                .taxMonth(deductionEntity.getTaxMonth())
                 .amount(deductionEntity.getAmount())
                 .type(deductionEntity.getType())
                 .createdDate(deductionEntity.getCreatedDate())
@@ -64,21 +64,23 @@ public class Deduction {
         List<Deduction> deductions = new ArrayList<>();
 
         deductions.addAll(Deduction.fromNationalPenstionList(deductionResponse.nationalPension(), userId));
-        deductions.addAll(Deduction.fromNationalPenstionList(deductionResponse.nationalPension(), userId));
+
         return deductions;
     }
 
     public static List<Deduction> fromNationalPenstionList(List<NationalPensionDeductionResponse> nationalPensionDeductions, String userId) {
         return nationalPensionDeductions.stream()
-                .map(deduction -> Deduction.of(deduction, userId))
+                .map(deduction -> Deduction.ofByNationPensionDeduction(deduction, userId))
                 .toList();
     }
 
-    public static Deduction of(NationalPensionDeductionResponse nationalPensionDeduction, String userId) {
+    public static Deduction ofByNationPensionDeduction(NationalPensionDeductionResponse nationalPensionDeduction, String userId) {
         return Deduction.defaultBuilder()
                 .userId(userId)
-                .year(Integer.valueOf(nationalPensionDeduction.month().split("-")[0]))
-                .month(Integer.valueOf(nationalPensionDeduction.month().split("-")[1]))
+                .taxYear(Integer.valueOf(nationalPensionDeduction.month().split("-")[0]))
+                .taxMonth(Integer.valueOf(nationalPensionDeduction.month().split("-")[1]))
+                .amount(Double.valueOf(nationalPensionDeduction.amount().replace(",", "")))
+                .type(DeductionType.NATIONAL_PENSION)
                 .build();
     }
 

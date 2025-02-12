@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @Entity
 @Table(name = "deduction")
@@ -20,9 +22,9 @@ public class DeductionEntity extends BaseTimeEntity {
     @Column(nullable = false)
     private String userId;
 
-    private Integer year;
+    private Integer taxYear;
 
-    private Integer month;
+    private Integer taxMonth;
 
     private Double amount;
 
@@ -30,10 +32,10 @@ public class DeductionEntity extends BaseTimeEntity {
     private DeductionType type;
 
     @Builder
-    private DeductionEntity(String userId, Integer year, Integer month, Double amount, DeductionType type) {
+    private DeductionEntity(String userId, Integer taxYear, Integer taxMonth, Double amount, DeductionType type) {
         this.userId = userId;
-        this.year = year;
-        this.month = month;
+        this.taxYear = taxYear;
+        this.taxMonth = taxMonth;
         this.amount = amount;
         this.type = type;
     }
@@ -41,11 +43,17 @@ public class DeductionEntity extends BaseTimeEntity {
     public static DeductionEntity toEntity(Deduction deduction) {
         return DeductionEntity.builder()
                 .userId(deduction.getUserId())
-                .year(deduction.getYear())
-                .month(deduction.getMonth())
+                .taxYear(deduction.getTaxYear())
+                .taxMonth(deduction.getTaxMonth())
                 .amount(deduction.getAmount())
                 .type(deduction.getType())
                 .build();
+    }
+
+    public static List<DeductionEntity> toEntityList(List<Deduction> deductions) {
+        return deductions.stream()
+                .map(DeductionEntity::toEntity)
+                .toList();
     }
 
 }
