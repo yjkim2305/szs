@@ -1,4 +1,4 @@
-package com.szs.szsyoungjunkim.deduction.application;
+package com.szs.szsyoungjunkim.deduction.application.service;
 
 import com.szs.szsyoungjunkim.deduction.feign.response.ScrapResponse;
 import lombok.RequiredArgsConstructor;

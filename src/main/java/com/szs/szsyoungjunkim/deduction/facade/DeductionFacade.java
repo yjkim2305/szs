@@ -1,7 +1,7 @@
 package com.szs.szsyoungjunkim.deduction.facade;
 
 import com.szs.szsyoungjunkim.common.exception.CoreException;
-import com.szs.szsyoungjunkim.deduction.application.DeductionService;
+import com.szs.szsyoungjunkim.deduction.application.service.DeductionService;
 import com.szs.szsyoungjunkim.deduction.domain.exception.DeductionErrorType;
 import com.szs.szsyoungjunkim.deduction.feign.ScrapClient;
 import com.szs.szsyoungjunkim.deduction.feign.request.ScrapRequest;
@@ -28,7 +28,7 @@ public class DeductionFacade {
         if (scrapResponse == null || scrapResponse.getData() == null) {
             throw new CoreException(DeductionErrorType.INVALID_RESPONSE_VALUE);
         }
-        
+
         deductionService.save(scrapResponse.getData());
     }
 }
