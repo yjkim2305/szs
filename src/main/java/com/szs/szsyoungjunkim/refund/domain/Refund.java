@@ -15,13 +15,13 @@ public class Refund {
     private Long id;
     private String userId;
     private Integer taxYear;
-    private Integer totalIncome;         //종합 소득 금액
+    private Long totalIncome;         //종합 소득 금액
     private Double totalTaxCredit;      //세액 공제
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
 
     @Builder(builderMethodName = "defaultBuilder")
-    private Refund(String userId, Integer taxYear, Integer totalIncome, Double totalTaxCredit) {
+    private Refund(String userId, Integer taxYear, Long totalIncome, Double totalTaxCredit) {
         this.userId = userId;
         this.taxYear = taxYear;
         this.totalIncome = totalIncome;
@@ -29,7 +29,7 @@ public class Refund {
     }
 
     @Builder(builderMethodName = "entityBuilder")
-    private Refund(Long id, String userId, Integer taxYear, Integer totalIncome, Double totalTaxCredit, LocalDateTime createdDate, LocalDateTime updatedDate) {
+    private Refund(Long id, String userId, Integer taxYear, Long totalIncome, Double totalTaxCredit, LocalDateTime createdDate, LocalDateTime updatedDate) {
         this.id = id;
         this.userId = userId;
         this.taxYear = taxYear;

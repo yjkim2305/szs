@@ -6,7 +6,7 @@ public record ScrapResponse(
     @JsonProperty("이름")
     String name,
     @JsonProperty("종합소득금액")
-    Integer totalIncomeTax,
+    Long totalIncomeTax,
     @JsonProperty("소득공제")
     DeductionResponse deduction
 ) {
