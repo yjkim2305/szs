@@ -5,7 +5,8 @@ import org.springframework.http.HttpStatus;
 
 public enum DeductionErrorType implements ErrorType {
 
-    INVALID_RESPONSE_VALUE(HttpStatus.BAD_GATEWAY, "스크래핑 응답이 null 입니다.")
+    INVALID_RESPONSE_VALUE(HttpStatus.BAD_GATEWAY, "스크래핑 응답이 null 입니다."),
+    EXIST_TAX_YEAR_DEDUCTION(HttpStatus.CONFLICT, "이미 존재하는 스크래핑 데이터입니다.")
     ;
 
     private final HttpStatus httpStatus;

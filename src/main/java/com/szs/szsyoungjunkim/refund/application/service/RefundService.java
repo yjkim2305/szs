@@ -15,4 +15,8 @@ public class RefundService {
     public void saveRefund(RefundCreateCommand refundCreateCommand) {
         refundRepository.saveRefund(Refund.from(refundCreateCommand));
     }
+
+    public Boolean existsByUserIdAndTaxYear(String userId, Integer taxYear) {
+        return refundRepository.existsByUserIdAndTaxYear(userId, taxYear);
+    }
 }

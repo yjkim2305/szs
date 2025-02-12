@@ -16,4 +16,9 @@ public class RefundRepositoryImpl implements RefundRepository {
     public void saveRefund(Refund refund) {
         refundJpaRepository.save(RefundEntity.toEntity(refund));
     }
+
+    @Override
+    public Boolean existsByUserIdAndTaxYear(String userId, Integer taxYear) {
+        return refundJpaRepository.existsByUserIdAndTaxYear(userId, taxYear);
+    }
 }

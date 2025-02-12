@@ -34,10 +34,15 @@ public class DeductionFacade {
             throw new CoreException(DeductionErrorType.INVALID_RESPONSE_VALUE);
         }
 
+        Integer taxYear = scrapResponse.getData().deduction().creditCardDeductionResponse().year();
+
+        if (deductionService.existsByUserIdAndTaxYear(userId, taxYear) || refundService.existsByUserIdAndTaxYear(userId, taxYear)) {
+            throw new CoreException(DeductionErrorType.EXIST_TAX_YEAR_DEDUCTION);
+        }
+
         deductionService.saveDeductions(scrapResponse.getData().deduction(), userId);
 
-
-        refundService.saveRefund(RefundCreateCommand.of(scrapResponse.getData().deduction().creditCardDeductionResponse().year(),
+        refundService.saveRefund(RefundCreateCommand.of(taxYear,
                 scrapResponse.getData().totalIncomeTax(),
                 scrapResponse.getData().deduction().taxCredit(),
                 userId));

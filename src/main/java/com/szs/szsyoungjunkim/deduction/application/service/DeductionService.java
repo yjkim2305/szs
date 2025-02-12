@@ -17,4 +17,8 @@ public class DeductionService {
     public void saveDeductions(DeductionResponse deductionResponse, String userId) {
         deductionRepository.saveAll(Deduction.convertToDeductions(deductionResponse, userId));
     }
+
+    public Boolean existsByUserIdAndTaxYear(String userId, Integer taxYear) {
+        return deductionRepository.existsByUserIdAndTaxYear(userId, taxYear);
+    }
 }

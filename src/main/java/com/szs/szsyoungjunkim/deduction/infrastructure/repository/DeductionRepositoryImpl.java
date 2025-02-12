@@ -18,4 +18,9 @@ public class DeductionRepositoryImpl implements DeductionRepository {
     public void saveAll(List<Deduction> deductions) {
         deductionJpaRepository.saveAll(DeductionEntity.toEntityList(deductions));
     }
+
+    @Override
+    public Boolean existsByUserIdAndTaxYear(String userId, Integer taxYear) {
+        return deductionJpaRepository.existsByUserIdAndTaxYear(userId, taxYear);
+    }
 }
