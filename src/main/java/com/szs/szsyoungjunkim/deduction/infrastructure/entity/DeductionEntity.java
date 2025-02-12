@@ -32,7 +32,7 @@ public class DeductionEntity extends BaseTimeEntity {
     private DeductionType type;
 
     @Builder
-    private DeductionEntity(String userId, Integer taxYear, Integer taxMonth, Double amount, DeductionType type) {
+    private DeductionEntity(Long id, String userId, Integer taxYear, Integer taxMonth, Double amount, DeductionType type) {
         this.userId = userId;
         this.taxYear = taxYear;
         this.taxMonth = taxMonth;
@@ -42,6 +42,7 @@ public class DeductionEntity extends BaseTimeEntity {
 
     public static DeductionEntity toEntity(Deduction deduction) {
         return DeductionEntity.builder()
+                .id(deduction.getId())
                 .userId(deduction.getUserId())
                 .taxYear(deduction.getTaxYear())
                 .taxMonth(deduction.getTaxMonth())
