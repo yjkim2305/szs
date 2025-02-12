@@ -24,13 +24,13 @@ public class DeductionEntity extends BaseTimeEntity {
 
     private Integer month;
 
-    private Long amount;
+    private Double amount;
 
     @Enumerated(EnumType.STRING)
     private DeductionType type;
 
     @Builder
-    private DeductionEntity(String userId, Integer year, Integer month, Long amount, DeductionType type) {
+    private DeductionEntity(String userId, Integer year, Integer month, Double amount, DeductionType type) {
         this.userId = userId;
         this.year = year;
         this.month = month;
