@@ -31,7 +31,8 @@ public class UserEntity extends BaseTimeEntity {
     private String regNo;
 
     @Builder
-    private UserEntity(String userId, String password, String name, String regNo) {
+    private UserEntity(Long id, String userId, String password, String name, String regNo) {
+        this.id = id;
         this.userId = userId;
         this.password = password;
         this.name = name;
@@ -40,6 +41,7 @@ public class UserEntity extends BaseTimeEntity {
 
     public static UserEntity toEntity(User user) {
         return UserEntity.builder()
+                .id(user.getId())
                 .userId(user.getUserId())
                 .password(user.getPassword())
                 .name(user.getName())
