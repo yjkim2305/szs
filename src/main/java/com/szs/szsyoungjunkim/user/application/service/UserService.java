@@ -45,4 +45,8 @@ public class UserService {
 
         return UserLoginDto.of(accessToken, refreshToken);
     }
+
+    public User findByUserId(String userId) {
+        return userRepository.findByUserId(userId);
+    }
 }

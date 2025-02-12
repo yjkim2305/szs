@@ -27,14 +27,27 @@ spring:
     refresh:
       expiration: 86400000 # 24시간
 
+  cloud:
+    openfeign:
+      client:
+        config:
+          scrapClient:
+            connect-timeout: 5000
+            read-timeout: 20000
+
+
 logging:
   level:
     ROOT: INFO
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql: TRACE
-
+    org.springframework.cloud.openfeign: DEBUG
+    feign: DEBUG
 
 springdoc:
   swagger-ui:
     path: /3o3/swagger.html
 
+scrap:
+  url: "https://codetest-v4.3o3.co.kr"
+  x-api-key: "wXEiqqJX+sUh03nzbgCN/Q=="

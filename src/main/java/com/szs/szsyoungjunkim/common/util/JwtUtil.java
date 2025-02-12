@@ -1,7 +1,6 @@
 package com.szs.szsyoungjunkim.common.util;
 
 import io.jsonwebtoken.Jwts;
-import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
@@ -72,12 +71,12 @@ public class JwtUtil {
     }
 
     public String getJwtFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader("access");
-        if (StringUtils.isNotEmpty(bearerToken)) {
-            return bearerToken;
+        String authorization = request.getHeader("Authorization");
+        if (authorization == null || !authorization.startsWith("Bearer ")) {
+            return null;
         }
 
-        return null;
+        return authorization.substring(7);
     }
 
     public Cookie createCookie(String key, String value) {
