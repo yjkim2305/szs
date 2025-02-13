@@ -7,6 +7,7 @@ import com.szs.szsyoungjunkim.user.api.response.UserLoginResponse;
 import com.szs.szsyoungjunkim.user.application.dto.UserCreateCommand;
 import com.szs.szsyoungjunkim.user.application.dto.UserLoginCommand;
 import com.szs.szsyoungjunkim.user.application.service.UserService;
+import com.szs.szsyoungjunkim.user.facade.UserFacade;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/szs")
 public class UserController {
     private final UserService userService;
+    private final UserFacade userFacade;
 
     @Operation(summary = "회원가입", description = "사용자가 회원가입을 한다.",
             responses = {
@@ -59,6 +61,6 @@ public class UserController {
             })
     @PostMapping("/login")
     public ApiRes<UserLoginResponse> loginUser(@RequestBody UserLoginRequest rq) {
-        return ApiRes.createSuccess(UserLoginResponse.of(userService.login(UserLoginCommand.from(rq))));
+        return ApiRes.createSuccess(UserLoginResponse.of(userFacade.login(UserLoginCommand.from(rq))));
     }
 }
