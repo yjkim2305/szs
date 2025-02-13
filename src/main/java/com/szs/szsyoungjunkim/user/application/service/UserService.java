@@ -1,7 +1,6 @@
 package com.szs.szsyoungjunkim.user.application.service;
 
 import com.szs.szsyoungjunkim.common.exception.CoreException;
-import com.szs.szsyoungjunkim.common.util.JwtUtil;
 import com.szs.szsyoungjunkim.user.application.dto.UserCreateCommand;
 import com.szs.szsyoungjunkim.user.application.repository.UserRepository;
 import com.szs.szsyoungjunkim.user.domain.User;
@@ -16,7 +15,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final JwtUtil jwtUtil;
 
     public void signUpUser(UserCreateCommand userCreateCommand) {
         Boolean isExist = userRepository.existsByUserId(userCreateCommand.userId());
