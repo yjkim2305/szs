@@ -38,7 +38,6 @@ public class JwtFilter extends OncePerRequestFilter {
         try {
             jwtUtil.isExpired(accessToken);
         } catch (ExpiredJwtException e) {
-//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Access Token Expired");
             throw new CoreException(AccessTokenErrorType.EXPIRE_ACCESS_TOKEN);
         }
 
@@ -46,7 +45,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
         //access 토큰인지 검사
         if (!category.equals("access")) {
-            //response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Access Token Invalid");
             throw new CoreException(AccessTokenErrorType.INVALID_ACCESS_TOKEN);
         }
 
