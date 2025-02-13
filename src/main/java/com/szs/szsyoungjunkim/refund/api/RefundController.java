@@ -38,7 +38,7 @@ public class RefundController {
                     @ApiResponse(responseCode = "400", description = "스크래핑을 먼저 진행하지 않았을 경우(기초 데이터가 없는 경우)",
                             content = @Content(mediaType = "application/json",
                                     schema = @Schema(example = "{\"status\": 400, \"message\": \"스크래핑을 먼저 진행해주세요.\", \"data\": null}"))),
-                    @ApiResponse(responseCode = "403", description = "jwt access 토큰이 만료되거나 적절하지 않은 토큰일 경우", content = @Content(mediaType = "application/json")),
+                    @ApiResponse(responseCode = "401", description = "jwt access 토큰이 만료되거나 적절하지 않은 토큰일 경우", content = @Content(mediaType = "application/json")),
                     @ApiResponse(responseCode = "404", description = "사용자의 과세표준을 찾지 못하는 경우",
                             content = @Content(mediaType = "application/json",
                                     schema = @Schema(example = "{\"status\": 404, \"message\": \"해당 세율 구간을 찾을 수 없습니다.\", \"data\": null}")))
