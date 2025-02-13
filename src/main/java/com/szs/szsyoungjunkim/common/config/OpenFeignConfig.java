@@ -2,6 +2,7 @@ package com.szs.szsyoungjunkim.common.config;
 
 import feign.RequestInterceptor;
 import feign.Retryer;
+import feign.codec.ErrorDecoder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +30,11 @@ public class OpenFeignConfig {
                 TimeUnit.SECONDS.toMillis(5), //최대 대기 시간 5초
                 3  //최대 재시도 횟수 3번
         );
+    }
+
+    @Bean
+    public ErrorDecoder errorDecoder() {
+        return new OpenFeignErrorDecoder();
     }
 
 }
