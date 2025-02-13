@@ -28,7 +28,6 @@ public class RefundController {
     @Operation(summary = "결정세액 조회", description = "사용자의 결정세액을 조회할 수 있다",
             security = @SecurityRequirement(name = "BearerAuth"),
             responses = {
-
                     @ApiResponse(
                             responseCode = "200",
                             description = "결정세액 조회 완료",
