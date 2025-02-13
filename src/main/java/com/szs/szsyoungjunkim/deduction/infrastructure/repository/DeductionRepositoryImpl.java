@@ -1,7 +1,9 @@
 package com.szs.szsyoungjunkim.deduction.infrastructure.repository;
 
+import com.szs.szsyoungjunkim.common.exception.CoreException;
 import com.szs.szsyoungjunkim.deduction.application.repository.DeductionRepository;
 import com.szs.szsyoungjunkim.deduction.domain.Deduction;
+import com.szs.szsyoungjunkim.deduction.domain.exception.DeductionErrorType;
 import com.szs.szsyoungjunkim.deduction.infrastructure.entity.DeductionEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -22,5 +24,16 @@ public class DeductionRepositoryImpl implements DeductionRepository {
     @Override
     public Boolean existsByUserIdAndTaxYear(String userId, Integer taxYear) {
         return deductionJpaRepository.existsByUserIdAndTaxYear(userId, taxYear);
+    }
+
+    @Override
+    public List<Deduction> findByUserId(String userId) {
+        List<DeductionEntity> deductions = deductionJpaRepository.findByUserId(userId);
+
+        if (deductions.isEmpty()) {
+            throw new CoreException(DeductionErrorType.NOT_EXIST_USER_DEDUCTION);
+        }
+
+        return Deduction.fromEntityList(deductions);
     }
 }

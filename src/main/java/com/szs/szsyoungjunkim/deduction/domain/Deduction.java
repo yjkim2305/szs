@@ -119,4 +119,10 @@ public class Deduction {
                 .build();
     }
 
+    public static List<Deduction> fromEntityList(List<DeductionEntity> deductionEntities) {
+        return deductionEntities.stream()
+                .map(Deduction::from)
+                .toList();
+    }
+
 }

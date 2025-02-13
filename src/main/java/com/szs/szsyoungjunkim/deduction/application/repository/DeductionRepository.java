@@ -7,4 +7,5 @@ import java.util.List;
 public interface DeductionRepository {
     void saveAll(List<Deduction> deductions);
     Boolean existsByUserIdAndTaxYear(String userId, Integer taxYear);
+    List<Deduction> findByUserId(String userId);
 }

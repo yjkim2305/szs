@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class DeductionService {
@@ -20,5 +22,9 @@ public class DeductionService {
 
     public Boolean existsByUserIdAndTaxYear(String userId, Integer taxYear) {
         return deductionRepository.existsByUserIdAndTaxYear(userId, taxYear);
+    }
+
+    public List<Deduction> findByUserId(String userId) {
+        return deductionRepository.findByUserId(userId);
     }
 }

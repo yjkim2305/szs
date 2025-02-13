@@ -19,4 +19,10 @@ public class RefundService {
     public Boolean existsByUserIdAndTaxYear(String userId, Integer taxYear) {
         return refundRepository.existsByUserIdAndTaxYear(userId, taxYear);
     }
+
+    public Refund findByUserId(String userId) {
+        return refundRepository.findByUserId(userId);
+    }
+
+
 }
