@@ -1,5 +1,7 @@
 package com.szs.szsyoungjunkim.common.config;
 
+import com.szs.szsyoungjunkim.common.exception.AccessTokenErrorType;
+import com.szs.szsyoungjunkim.common.exception.CoreException;
 import com.szs.szsyoungjunkim.common.util.JwtUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
@@ -36,14 +38,16 @@ public class JwtFilter extends OncePerRequestFilter {
         try {
             jwtUtil.isExpired(accessToken);
         } catch (ExpiredJwtException e) {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Access Token Expired");
+//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Access Token Expired");
+            throw new CoreException(AccessTokenErrorType.EXPIRE_ACCESS_TOKEN);
         }
 
         String category = jwtUtil.getCategory(accessToken);
 
         //access 토큰인지 검사
         if (!category.equals("access")) {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Access Token Invalid");
+            //response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Access Token Invalid");
+            throw new CoreException(AccessTokenErrorType.INVALID_ACCESS_TOKEN);
         }
 
         String userId = jwtUtil.getUserId(accessToken);
