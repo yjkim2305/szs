@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,7 +61,7 @@ public class UserController {
                                     schema = @Schema(example = "{\"status\": 401, \"message\": \"아이디 또는 비밀번호가 잘못되었습니다.\", \"data\": null}"))),
             })
     @PostMapping("/login")
-    public ApiRes<UserLoginResponse> loginUser(@RequestBody UserLoginRequest rq) {
-        return ApiRes.createSuccess(UserLoginResponse.of(userFacade.login(UserLoginCommand.from(rq))));
+    public ApiRes<UserLoginResponse> loginUser(@RequestBody UserLoginRequest rq, HttpServletResponse response) {
+        return ApiRes.createSuccess(UserLoginResponse.of(userFacade.login(UserLoginCommand.from(rq), response)));
     }
 }

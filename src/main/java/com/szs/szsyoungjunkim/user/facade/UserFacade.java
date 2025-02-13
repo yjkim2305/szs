@@ -6,6 +6,7 @@ import com.szs.szsyoungjunkim.user.application.dto.UserLoginCommand;
 import com.szs.szsyoungjunkim.user.application.dto.UserLoginDto;
 import com.szs.szsyoungjunkim.user.application.service.UserService;
 import com.szs.szsyoungjunkim.user.domain.User;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,7 +23,7 @@ public class UserFacade {
     @Value("${spring.jwt.refresh.expiration}")
     private Long refreshExpiration;
 
-    public UserLoginDto login(UserLoginCommand userLoginCommand) {
+    public UserLoginDto login(UserLoginCommand userLoginCommand, HttpServletResponse response) {
         //사용자 존재 여부 확인
         User user = userService.findByUserId(userLoginCommand.userId());
         //비밀번호 검증
@@ -33,7 +34,7 @@ public class UserFacade {
 
         //refresh token 저장
         refreshService.addRefreshToken(user.getUserId(), refreshToken, refreshExpiration);
-
+        response.addCookie(jwtUtil.createCookie("refresh", refreshToken));
         return UserLoginDto.of(accessToken, refreshToken);
     }
 
