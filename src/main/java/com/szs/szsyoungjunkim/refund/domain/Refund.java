@@ -1,6 +1,6 @@
 package com.szs.szsyoungjunkim.refund.domain;
 
-import com.szs.szsyoungjunkim.refund.application.service.dto.RefundCreateCommand;
+import com.szs.szsyoungjunkim.refund.application.dto.RefundCreateCommand;
 import com.szs.szsyoungjunkim.refund.infrastructure.entity.RefundEntity;
 import lombok.AccessLevel;
 import lombok.Builder;

@@ -9,7 +9,7 @@ import com.szs.szsyoungjunkim.deduction.feign.response.DeductionResponse;
 import com.szs.szsyoungjunkim.deduction.feign.response.NationalPensionDeductionResponse;
 import com.szs.szsyoungjunkim.deduction.feign.response.ScrapResponse;
 import com.szs.szsyoungjunkim.refund.application.service.RefundService;
-import com.szs.szsyoungjunkim.refund.application.service.dto.RefundCreateCommand;
+import com.szs.szsyoungjunkim.refund.application.dto.RefundCreateCommand;
 import com.szs.szsyoungjunkim.user.application.service.UserService;
 import com.szs.szsyoungjunkim.user.domain.User;
 import org.junit.jupiter.api.DisplayName;

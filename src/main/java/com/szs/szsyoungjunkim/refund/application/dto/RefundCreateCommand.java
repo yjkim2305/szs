@@ -1,4 +1,4 @@
-package com.szs.szsyoungjunkim.refund.application.service.dto;
+package com.szs.szsyoungjunkim.refund.application.dto;
 
 public record RefundCreateCommand(
         Integer taxYear,

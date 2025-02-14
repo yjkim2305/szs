@@ -1,7 +1,7 @@
 package com.szs.szsyoungjunkim.refund.application.service;
 
 import com.szs.szsyoungjunkim.refund.application.repository.RefundRepository;
-import com.szs.szsyoungjunkim.refund.application.service.dto.RefundCreateCommand;
+import com.szs.szsyoungjunkim.refund.application.dto.RefundCreateCommand;
 import com.szs.szsyoungjunkim.refund.domain.Refund;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
