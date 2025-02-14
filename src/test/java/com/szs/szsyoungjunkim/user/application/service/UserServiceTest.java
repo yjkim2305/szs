@@ -4,7 +4,7 @@ import com.szs.szsyoungjunkim.common.exception.CoreException;
 import com.szs.szsyoungjunkim.user.application.dto.UserCreateCommand;
 import com.szs.szsyoungjunkim.user.application.repository.UserRepository;
 import com.szs.szsyoungjunkim.user.domain.User;
-import com.szs.szsyoungjunkim.user.domain.exception.UserErrorType;
+import com.szs.szsyoungjunkim.user.api.exception.UserErrorType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

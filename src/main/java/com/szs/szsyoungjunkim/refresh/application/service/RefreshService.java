@@ -5,7 +5,7 @@ import com.szs.szsyoungjunkim.common.util.JwtUtil;
 import com.szs.szsyoungjunkim.refresh.application.dto.RefreshReissueDto;
 import com.szs.szsyoungjunkim.refresh.application.repository.RefreshRepository;
 import com.szs.szsyoungjunkim.refresh.domain.Refresh;
-import com.szs.szsyoungjunkim.refresh.domain.exception.RefreshErrorType;
+import com.szs.szsyoungjunkim.refresh.api.exception.RefreshErrorType;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

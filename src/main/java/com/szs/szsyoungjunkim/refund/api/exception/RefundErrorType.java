@@ -1,17 +1,18 @@
-package com.szs.szsyoungjunkim.deduction.domain.exception;
+package com.szs.szsyoungjunkim.refund.api.exception;
 
 import com.szs.szsyoungjunkim.common.exception.ErrorType;
 import org.springframework.http.HttpStatus;
 
-public enum OpenFeignErrorType implements ErrorType {
-    API_NOT_FOUND_EXCEPTION(HttpStatus.NOT_FOUND, "요청한 리소스를 찾을 수 없습니다."),
-    API_INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "요청한 서버 내부 오류가 발생했습니다.")
+public enum RefundErrorType implements ErrorType {
+
+    NOT_EXIST_USER_REFUND(HttpStatus.BAD_REQUEST, "스크래핑을 먼저 진행해주세요."),
+    NOT_EXIST_BRACKET(HttpStatus.NOT_FOUND, "해당 세율 구간을 찾을 수 없습니다.")
     ;
 
     private final HttpStatus httpStatus;
     private final String message;
 
-    OpenFeignErrorType(HttpStatus httpStatus, String message) {
+    RefundErrorType(HttpStatus httpStatus, String message) {
         this.httpStatus = httpStatus;
         this.message = message;
     }

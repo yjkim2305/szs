@@ -1,7 +1,7 @@
 package com.szs.szsyoungjunkim.deduction.application.service;
 
 import com.szs.szsyoungjunkim.common.exception.CoreException;
-import com.szs.szsyoungjunkim.deduction.domain.exception.DeductionErrorType;
+import com.szs.szsyoungjunkim.deduction.api.exception.DeductionErrorType;
 import com.szs.szsyoungjunkim.deduction.feign.ScrapClient;
 import com.szs.szsyoungjunkim.deduction.feign.request.ScrapRequest;
 import com.szs.szsyoungjunkim.deduction.feign.response.ClientApiRes;

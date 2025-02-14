@@ -3,7 +3,7 @@ package com.szs.szsyoungjunkim.deduction.facade;
 import com.szs.szsyoungjunkim.common.exception.CoreException;
 import com.szs.szsyoungjunkim.deduction.application.service.DeductionService;
 import com.szs.szsyoungjunkim.deduction.application.service.ScrapService;
-import com.szs.szsyoungjunkim.deduction.domain.exception.DeductionErrorType;
+import com.szs.szsyoungjunkim.deduction.api.exception.DeductionErrorType;
 import com.szs.szsyoungjunkim.deduction.feign.response.ScrapResponse;
 import com.szs.szsyoungjunkim.refund.application.service.RefundService;
 import com.szs.szsyoungjunkim.refund.application.service.dto.RefundCreateCommand;

@@ -3,7 +3,7 @@ package com.szs.szsyoungjunkim.refund.infrastructure.repository;
 import com.szs.szsyoungjunkim.common.exception.CoreException;
 import com.szs.szsyoungjunkim.refund.application.repository.RefundRepository;
 import com.szs.szsyoungjunkim.refund.domain.Refund;
-import com.szs.szsyoungjunkim.refund.domain.exception.RefundErrorType;
+import com.szs.szsyoungjunkim.refund.api.exception.RefundErrorType;
 import com.szs.szsyoungjunkim.refund.infrastructure.entity.RefundEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

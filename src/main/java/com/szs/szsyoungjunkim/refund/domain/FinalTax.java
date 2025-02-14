@@ -3,7 +3,7 @@ package com.szs.szsyoungjunkim.refund.domain;
 import com.szs.szsyoungjunkim.common.exception.CoreException;
 import com.szs.szsyoungjunkim.deduction.domain.Deduction;
 import com.szs.szsyoungjunkim.refund.domain.enums.TaxBracket;
-import com.szs.szsyoungjunkim.refund.domain.exception.RefundErrorType;
+import com.szs.szsyoungjunkim.refund.api.exception.RefundErrorType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;

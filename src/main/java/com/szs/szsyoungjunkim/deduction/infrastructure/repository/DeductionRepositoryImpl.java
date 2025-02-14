@@ -3,7 +3,7 @@ package com.szs.szsyoungjunkim.deduction.infrastructure.repository;
 import com.szs.szsyoungjunkim.common.exception.CoreException;
 import com.szs.szsyoungjunkim.deduction.application.repository.DeductionRepository;
 import com.szs.szsyoungjunkim.deduction.domain.Deduction;
-import com.szs.szsyoungjunkim.deduction.domain.exception.DeductionErrorType;
+import com.szs.szsyoungjunkim.deduction.api.exception.DeductionErrorType;
 import com.szs.szsyoungjunkim.deduction.infrastructure.entity.DeductionEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

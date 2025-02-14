@@ -1,19 +1,18 @@
-package com.szs.szsyoungjunkim.user.domain.exception;
+package com.szs.szsyoungjunkim.deduction.api.exception;
 
 import com.szs.szsyoungjunkim.common.exception.ErrorType;
 import org.springframework.http.HttpStatus;
 
-public enum UserErrorType implements ErrorType {
-    INVALID_USER(HttpStatus.BAD_REQUEST, "회원가입에 적합하지 않는 회원입니다."),
-    EXIST_USER(HttpStatus.CONFLICT, "이미 존재하는 회원입니다."),
-    NOT_EXIST_USER_PASSWORD(HttpStatus.UNAUTHORIZED, "아이디 또는 비밀번호가 잘못되었습니다.")
+public enum DeductionErrorType implements ErrorType {
+    INVALID_RESPONSE_VALUE(HttpStatus.BAD_GATEWAY, "스크래핑 응답이 null 입니다."),
+    EXIST_TAX_YEAR_DEDUCTION(HttpStatus.CONFLICT, "이미 존재하는 스크래핑 데이터입니다."),
+    NOT_EXIST_USER_DEDUCTION(HttpStatus.BAD_REQUEST, "스크래핑을 먼저 진행해주세요.")
     ;
-
 
     private final HttpStatus httpStatus;
     private final String message;
 
-    UserErrorType(HttpStatus httpStatus, String message) {
+    DeductionErrorType(HttpStatus httpStatus, String message) {
         this.httpStatus = httpStatus;
         this.message = message;
     }

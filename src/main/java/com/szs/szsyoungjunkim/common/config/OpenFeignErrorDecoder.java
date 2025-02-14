@@ -1,7 +1,7 @@
 package com.szs.szsyoungjunkim.common.config;
 
 import com.szs.szsyoungjunkim.common.exception.CoreException;
-import com.szs.szsyoungjunkim.deduction.domain.exception.OpenFeignErrorType;
+import com.szs.szsyoungjunkim.deduction.api.exception.OpenFeignErrorType;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 

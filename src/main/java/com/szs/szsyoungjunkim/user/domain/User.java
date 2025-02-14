@@ -2,7 +2,7 @@ package com.szs.szsyoungjunkim.user.domain;
 
 import com.szs.szsyoungjunkim.common.exception.CoreException;
 import com.szs.szsyoungjunkim.user.application.dto.UserCreateCommand;
-import com.szs.szsyoungjunkim.user.domain.exception.UserErrorType;
+import com.szs.szsyoungjunkim.user.api.exception.UserErrorType;
 import com.szs.szsyoungjunkim.user.infrastructure.entity.UserEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
