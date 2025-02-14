@@ -2,6 +2,7 @@ package com.szs.szsyoungjunkim.deduction.application.service;
 
 import com.szs.szsyoungjunkim.deduction.application.repository.DeductionRepository;
 import com.szs.szsyoungjunkim.deduction.domain.Deduction;
+import com.szs.szsyoungjunkim.deduction.domain.enums.DeductionType;
 import com.szs.szsyoungjunkim.deduction.feign.response.CreditCardDeductionResponse;
 import com.szs.szsyoungjunkim.deduction.feign.response.DeductionResponse;
 import com.szs.szsyoungjunkim.deduction.feign.response.NationalPensionDeductionResponse;
@@ -71,7 +72,7 @@ class DeductionServiceTest {
     @DisplayName("소득공제가 해당 유저의 데이터가 존재할 경우 데이터를 반환한다.")
     void findByUserId_test() {
         String userId = "testUser";
-        List<Deduction> deductions = Collections.singletonList(Deduction.defaultBuilder().build());
+        List<Deduction> deductions = Collections.singletonList(Deduction.of(userId, 2023, 1, 300000.25, DeductionType.NATIONAL_PENSION));
         when(deductionRepository.findByUserId(userId)).thenReturn(deductions);
 
         List<Deduction> result = deductionService.findByUserId(userId);
