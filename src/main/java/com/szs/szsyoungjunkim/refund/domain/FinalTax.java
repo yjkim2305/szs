@@ -44,12 +44,16 @@ public class FinalTax {
         //세액공제
         long totalTaxCredit = (refund.getTotalTaxCredit() != null) ? Math.round(refund.getTotalTaxCredit()) : 0L;
 
-        return taxAmount - totalTaxCredit;
+        return Math.max(0, taxAmount - totalTaxCredit);
     }
 
     private long taxAmountCalculate(long taxDeduction) {
         //과세표준
-        long taxBase = refund.getTotalIncome() - taxDeduction;
+        long taxBase = Math.max(refund.getTotalIncome() - taxDeduction, 0);
+
+        if (taxBase == 0) {
+            return 0L;
+        }
 
         TaxBracket taxBracket = null;
         for (TaxBracket bracket : TaxBracket.values()) {
