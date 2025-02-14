@@ -9,7 +9,6 @@ import com.szs.szsyoungjunkim.refresh.domain.exception.RefreshErrorType;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,7 @@ public class RefreshService {
     }
 
     @Transactional
-    public RefreshReissueDto reissueToken(HttpServletRequest request, HttpServletResponse response) {
+    public RefreshReissueDto reissueToken(HttpServletRequest request) {
         String refreshToken = null;
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
@@ -72,8 +71,10 @@ public class RefreshService {
         refreshRepository.deleteByRefreshToken(refreshToken);
         refreshRepository.save(Refresh.of(userId, newRefresh, refreshExpiration));
 
-        response.addCookie(jwtUtil.createCookie("refresh", newRefresh));
-
         return RefreshReissueDto.of(newAccess, newRefresh);
+    }
+
+    public Cookie createRefreshCookie(String refreshToken) {
+        return jwtUtil.createCookie("refresh", refreshToken);
     }
 }

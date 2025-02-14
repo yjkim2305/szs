@@ -2,6 +2,7 @@ package com.szs.szsyoungjunkim.refresh.api;
 
 import com.szs.szsyoungjunkim.common.api.response.ApiRes;
 import com.szs.szsyoungjunkim.refresh.api.response.RefreshReissueResponse;
+import com.szs.szsyoungjunkim.refresh.application.dto.RefreshReissueDto;
 import com.szs.szsyoungjunkim.refresh.application.service.RefreshService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,9 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class RefreshController {
     private final RefreshService refreshService;
 
-    @Operation(summary = "accessToken 재발급", description = "accessToken 만료 시 refreshToken으로 재발급",
+    @Operation(summary = "accessToken 재발급", description = "accessToken 만료 시 쿠키에 저장된 refreshToken으로 재발급",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "accessToken 재발급 성공(accessToken: API 요청 시 인증, refreshToken: accessToken 재발급 할 때 사용)",
+                    @ApiResponse(responseCode = "200", description = "accessToken 재발급 성공(accessToken: API 요청 시 인증, refreshToken: accessToken 재발급할 때 사용)",
                             content = @Content(mediaType = "application/json",
                                     schema = @Schema(example = "{\n" +
                                             "  \"status\": 200,\n" +
@@ -46,6 +47,8 @@ public class RefreshController {
             })
     @PostMapping("/reissue")
     public ApiRes<?> reissue(HttpServletRequest request, HttpServletResponse response) {
-        return ApiRes.createSuccess(RefreshReissueResponse.from(refreshService.reissueToken(request, response)));
+        RefreshReissueDto refreshReissueDto = refreshService.reissueToken(request);
+        response.addCookie(refreshService.createRefreshCookie(refreshReissueDto.refreshToken()));
+        return ApiRes.createSuccess(RefreshReissueResponse.from(refreshReissueDto));
     }
 }
