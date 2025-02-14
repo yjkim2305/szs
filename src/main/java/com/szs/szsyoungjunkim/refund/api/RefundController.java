@@ -46,6 +46,6 @@ public class RefundController {
     public ApiRes<RefundResponse> refund(HttpServletRequest request) {
         String token = jwtUtil.getJwtFromRequest(request);
         String userId = jwtUtil.getUserId(token);
-        return ApiRes.createSuccess(new RefundResponse(refundFacade.getFinalTaxAmount(userId)));
+        return ApiRes.createSuccess(new RefundResponse(refundFacade.getFinalTaxAmount(userId).getFormattedTax()));
     }
 }
