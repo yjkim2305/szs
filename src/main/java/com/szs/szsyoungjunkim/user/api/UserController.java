@@ -6,6 +6,8 @@ import com.szs.szsyoungjunkim.user.api.request.UserLoginRequest;
 import com.szs.szsyoungjunkim.user.api.response.UserLoginResponse;
 import com.szs.szsyoungjunkim.user.application.dto.UserCreateCommand;
 import com.szs.szsyoungjunkim.user.application.dto.UserLoginCommand;
+import com.szs.szsyoungjunkim.user.application.dto.UserLoginDto;
+import com.szs.szsyoungjunkim.user.application.service.AuthService;
 import com.szs.szsyoungjunkim.user.application.service.UserService;
 import com.szs.szsyoungjunkim.user.facade.UserFacade;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final UserService userService;
     private final UserFacade userFacade;
+    private final AuthService authService;
 
     @Operation(summary = "회원가입", description = "사용자가 회원가입을 한다.",
             responses = {
@@ -62,6 +65,8 @@ public class UserController {
             })
     @PostMapping("/login")
     public ApiRes<UserLoginResponse> loginUser(@RequestBody UserLoginRequest rq, HttpServletResponse response) {
-        return ApiRes.createSuccess(UserLoginResponse.of(userFacade.login(UserLoginCommand.from(rq), response)));
+        UserLoginDto userLoginDto = userFacade.login(UserLoginCommand.from(rq));
+        response.addCookie(authService.createRefreshCookie(userLoginDto.refreshToken()));
+        return ApiRes.createSuccess(UserLoginResponse.of(userLoginDto));
     }
 }
