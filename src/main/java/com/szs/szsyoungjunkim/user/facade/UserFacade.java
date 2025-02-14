@@ -1,6 +1,5 @@
 package com.szs.szsyoungjunkim.user.facade;
 
-import com.szs.szsyoungjunkim.common.util.JwtUtil;
 import com.szs.szsyoungjunkim.user.application.dto.UserLoginCommand;
 import com.szs.szsyoungjunkim.user.application.dto.UserLoginDto;
 import com.szs.szsyoungjunkim.user.application.service.AuthService;
@@ -16,7 +15,6 @@ public class UserFacade {
     private final UserService userService;
     private final AuthService authService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final JwtUtil jwtUtil;
 
     public UserLoginDto login(UserLoginCommand userLoginCommand) {
         //사용자 존재 여부 확인
