@@ -43,7 +43,8 @@ public class RefreshController {
                                     schema = @Schema(example = "{\"status\": 401, \"message\": \"refreshToken이 만료되었습니다.\", \"data\": null}"))),
                     @ApiResponse(responseCode = "401", description = "적합하지 않은 refreshToken일 경우",
                             content = @Content(mediaType = "application/json",
-                                    schema = @Schema(example = "{\"status\": 401, \"message\": \"적합하지 않은 refreshToken 입니다.\", \"data\": null}")))
+                                    schema = @Schema(example = "{\"status\": 401, \"message\": \"적합하지 않은 refreshToken 입니다.\", \"data\": null}"))),
+                    @ApiResponse(responseCode = "403", description = "Authorize가 존재하지 않을 경우", content = @Content(mediaType = "application/json")),
             })
     @PostMapping("/reissue")
     public ApiRes<?> reissue(HttpServletRequest request, HttpServletResponse response) {

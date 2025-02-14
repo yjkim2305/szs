@@ -29,6 +29,7 @@ public class DeductionController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "스크래핑 완료"),
                     @ApiResponse(responseCode = "401", description = "jwt access 토큰이 만료되거나 적절하지 않은 토큰일 경우", content = @Content(mediaType = "application/json")),
+                    @ApiResponse(responseCode = "403", description = "Authorize가 존재하지 않을 경우", content = @Content(mediaType = "application/json")),
                     @ApiResponse(responseCode = "404", description = "외부 스크래핑 API 서버 리소스 찾을 수 없을 경우",
                             content = @Content(mediaType = "application/json",
                                     schema = @Schema(example = "{\"status\": 404, \"message\": \"요청한 리소스를 찾을 수 없습니다.\", \"data\": null}"))),
